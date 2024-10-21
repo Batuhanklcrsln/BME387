@@ -11,3 +11,5 @@ def is_prime(num):
 for number in range(1, 101):
     if is_prime(number):
         print(number)
+        print("hello")
+        
