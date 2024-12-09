@@ -41,7 +41,7 @@ def move_random_files(source_folder, target_folder, number_of_files):
 # Kullanım örneği
 source_directory = "/Users/batuhankilicarslan/Desktop/bloodcells_dataset/DATA/train"  # Kaynak klasör yolu
 target_directory = "/Users/batuhankilicarslan/Desktop/bloodcells_dataset/DATA/val"  # Hedef klasör yolu
-move_random_files(source_directory, target_directory, 122)
+move_random_files(source_directory, target_directory, 122) #1220 adet doya içeren bir train klasöründen alınıyorsa %10'u olarak 122 adet random val dosyasına aktarılır.
 
 """#Code to Install Libraries"""
 
