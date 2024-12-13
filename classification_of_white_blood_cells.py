@@ -19,7 +19,7 @@ def move_random_files(source_dir, destination_dir, file_count):
     :param destination_dir: Dosyaların taşınacağı hedef dizin
     :param file_count: Taşınacak dosya sayısı
     """
-    
+    # Kaynak dizindeki tüm dosyaları listelemak için
     files = [f for f in os.listdir(source_dir) if os.path.isfile(os.path.join(source_dir, f))]
 
     if len(files) < file_count:
@@ -29,6 +29,7 @@ def move_random_files(source_dir, destination_dir, file_count):
     
     selected_files = random.sample(files, file_count)
 
+    # Taşınan dosyaların isimlerini tutmak için bir liste oluşturur
     moved_files = []
 
     for file in selected_files:
@@ -36,6 +37,7 @@ def move_random_files(source_dir, destination_dir, file_count):
         destination_path = os.path.join(destination_dir, file)
 
         try:
+            # Dosyayı taşımak için
             shutil.move(source_path, destination_path)
             moved_files.append(file)
         except Exception as e:
@@ -46,14 +48,16 @@ def move_random_files(source_dir, destination_dir, file_count):
         print(moved_file)
 
 if __name__ == "__main__":
+    # kaynak, hedef dosya yolları ve random taşınacak dosya sayısı
     source_dir = "/content/drive/MyDrive/bloodcellProject/Data.b/train/platelet"
     destination_dir = "/content/drive/MyDrive/bloodcellProject/test/platelet"
-    file_count = 50
+    file_count = 50    # Taşınacak dosya sayısı
 
-    
+    # Dizinin var olup olmadığını kontrol eder ve oluşturur
     if not os.path.exists(destination_dir):
         os.makedirs(destination_dir)
 
+    # Fonksiyonu çalıştırır
     move_random_files(source_dir, destination_dir, file_count)
 
 #Selecting a random percentage of 10% of the files from each class based on the number of files in the training set for the validation files
