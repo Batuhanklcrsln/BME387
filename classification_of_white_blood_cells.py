@@ -60,8 +60,8 @@ if __name__ == "__main__":
     # Fonksiyonu çalıştırır
     move_random_files(source_dir, destination_dir, file_count)
 
-#Selecting a random percentage of 10% of the files from each class based on the number of files in the training set for the validation files
-"""
+"""#Selecting a random percentage of 10% of the files from each class based on the number of files in the training set for the validation files"""
+
 
 import os
 import shutil
