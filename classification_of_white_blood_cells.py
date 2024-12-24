@@ -132,3 +132,38 @@ results = model.train(data=DATA_DIR,  # Eğitim verilerinin dizini
                       lr0=0.001,  # Başlangıç öğrenme oranı (learning rate)
                       optimizer='Adam', # Kullanılacak optimizasyon algoritması: Adam
                       cache=True) # Veri setinin önbelleğe alınması; eğitim sürecini hızlandırır
+
+"""#Test"""
+from ultralytics import YOLO
+# Modeli yüklemek için
+model = YOLO("/content/drive/MyDrive/bloodcellProject/runs_bloodcell/train3/weights/best.pt")
+# Test resmi üzerinde tahmin yaptırmak için
+results = model.predict("/content/drive/MyDrive/bloodcellProject/test/neuimg_t1.jpg",show=True)
+# Sonuçları yazdır
+print(results)
+
+"""#Class Prediction Visualization"""
+from ultralytics import YOLO
+import cv2  # Görüntü işleme için gerekli
+import matplotlib.pyplot as plt  # Görüntü göstermek için gerekli
+# Modeli yüklemek için
+model = YOLO("/content/drive/MyDrive/bloodcellProject/runs_bloodcell/train3/weights/best.pt")
+# Görüntüyü okuması için
+image_path = "/content/drive/MyDrive/bloodcellProject/test/eosimg_t1.jpg"
+image = cv2.imread(image_path)
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # OpenCV'den okunan görüntüyü RGB'ye dönüştür
+# Tahmin yapma kodu
+results = model.predict(image, conf=0.7)
+# Sınıf tahminini almak için
+for result in results:
+    class_probs = result.probs  # Sınıf olasılıklarını alması için
+    top_class_index = class_probs.top1  # En yüksek güven skoruna sahip sınıfın indeksi
+    class_name = result.names[top_class_index]
+    confidence = class_probs.data[top_class_index].item()
+    # Sınıf adını görüntüye eklemesi için
+    cv2.putText(image, f"{class_name} {confidence:.2f}", (10, 50),
+                cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+# Görüntüyü göstermesi için
+plt.imshow(image)
+plt.axis('off')
+plt.show()
